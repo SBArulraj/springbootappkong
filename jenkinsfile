@@ -15,8 +15,7 @@ pipeline {
         }*/
          stage('Code Checkout') {
             steps {
-                //git branch: 'main', changelog: false, poll: false, url: 'https://github.com/SBArulraj/springbootappkong.git'
-                git branch: 'main', credentialsId: '19bd64bd-4ddd-4134-931c-9346a9382e85', url: 'https://github.com/SBArulraj/springbootappkong.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/SBArulraj/springbootappkong.git'
             }
         }
 
