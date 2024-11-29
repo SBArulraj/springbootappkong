@@ -5,4 +5,4 @@ services:
     routes:
       - name: spring-boot-route
         paths:
-          - /api
+          - /

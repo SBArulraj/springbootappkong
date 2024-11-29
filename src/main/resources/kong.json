@@ -8,7 +8,7 @@
         {
           "name": "spring-boot-route",
           "paths": [
-            "/api"
+            "/"
           ]
         }
       ]
