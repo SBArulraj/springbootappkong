@@ -9,7 +9,8 @@
           "name": "spring-boot-route",
           "paths": [
             "/"
-          ]
+          ],
+          "strip_path": false
         }
       ]
     }
