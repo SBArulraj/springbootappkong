@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "spring-boot-service",
-      "url": "http://localhost:8080",
+      "url": "http://localhost:8080/",
       "routes": [
         {
           "name": "spring-boot-route",
