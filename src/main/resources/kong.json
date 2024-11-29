@@ -1,0 +1,17 @@
+{
+  "_format_version": "2.3",
+  "services": [
+    {
+      "name": "spring-boot-service",
+      "url": "http://spring-boot-app:8080",
+      "routes": [
+        {
+          "name": "spring-boot-route",
+          "paths": [
+            "/api"
+          ]
+        }
+      ]
+    }
+  ]
+}
