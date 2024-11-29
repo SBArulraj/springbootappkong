@@ -1,7 +1,7 @@
 _format_version: "3.0"
 services:
   - name: spring-boot-service
-    url: http://localhost:8080/
+    url: http://192.168.1.11:8080/
     routes:
       - name: spring-boot-route
         paths:
