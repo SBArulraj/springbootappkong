@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+    environment {
+        KONG_ADMIN_API = 'http://localhost:8001'
+        APP_NAME = 'spring-boot-app'
+        DOCKER_IMAGE = 'myorg/spring-boot-app:latest'
+        KONG_YAML_PATH = 'src/main/resources/kong.json'
+    }
+    stages {
+        /*stage('Checkout Code') {
+            steps {
+                checkout scm
+
+            }
+        }*/
+         stage('Code Checkout') {
+            steps {
+                //git branch: 'main', changelog: false, poll: false, url: 'https://github.com/SBArulraj/springbootappkong.git'
+                git branch: 'main', credentialsId: '19bd64bd-4ddd-4134-931c-9346a9382e85', url: 'https://github.com/SBArulraj/springbootappkong.git'
+            }
+        }
+
+        stage('Build Spring Boot App') {
+            steps {
+                sh './mvnw clean package -DskipTests'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t ${DOCKER_IMAGE} .'
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                sh '''
+                    docker stop ${APP_NAME} || true
+                    docker rm ${APP_NAME} || true
+                    docker run -d --name ${APP_NAME} -p 8080:8080 ${DOCKER_IMAGE}
+                '''
+            }
+        }
+        stage('Configure Kong Gateway') {
+            steps {
+                sh '''
+                    curl -X POST ${KONG_ADMIN_API}/config \
+                        -H "Content-Type: application/json" \
+                        --data-binary @${KONG_YAML_PATH}
+                '''
+            }
+        }
+    }
+    post {
+        success {
+            echo "Pipeline executed successfully!"
+        }
+        failure {
+            echo "Pipeline failed."
+        }
+    }
+}
