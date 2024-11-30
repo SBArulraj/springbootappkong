@@ -1,4 +1,4 @@
-version: "2.3"
+_version: "2.3"
 services:
   - name: spring-boot-service
     url: http://192.168.1.11:8080/
