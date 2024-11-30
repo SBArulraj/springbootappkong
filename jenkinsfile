@@ -42,7 +42,7 @@ pipeline {
             steps {
                 sh '''
                     curl -X POST ${KONG_ADMIN_API}/config \
-                        -H "Content-Type: application/json" \
+
                         --data-binary @${KONG_YAML_PATH}
                 '''
             }
